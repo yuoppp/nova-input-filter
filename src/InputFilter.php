@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OptimistDigital\NovaInputFilter;
 
-use Illuminate\Http\Request;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Filters\Filter;
 
 class InputFilter extends Filter
@@ -22,7 +22,7 @@ class InputFilter extends Filter
         if (!empty($name)) $this->withName($name);
     }
 
-    public function apply(Request $request, $query, $search)
+    public function apply(NovaRequest $request, $query, $search)
     {
         return $query->where(function ($query) use ($search) {
             $model = $query->getModel();
@@ -61,7 +61,7 @@ class InputFilter extends Filter
         return $this;
     }
 
-    public function options(Request $request)
+    public function options(NovaRequest $request)
     {
         return $this->options;
     }
